@@ -23,8 +23,10 @@ PORT=$3
 echo "---> Building the image..."
 docker build -t $NAME .
 echo "---> Running the container..."
+docker stop $NAME
 docker rm $NAME
-docker run -i -d --name $NAME -p $HOST_PORT:$PORT $NAME
+docker run -i -d --name $NAME -v /home/robka/docker-nodejs-test/express-es6-skeleton:/usr/src/app -p $HOST_PORT:$PORT $NAME
 echo "---> Starting the app"
+sudo docker exec $NAME npm install
 sudo docker exec -d $NAME pm2 start --no-daemon --watch bin/www
 
