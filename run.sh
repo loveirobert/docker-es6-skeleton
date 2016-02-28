@@ -26,5 +26,5 @@ echo "---> Running the container..."
 docker rm $NAME
 docker run -i -d --name $NAME -p $HOST_PORT:$PORT $NAME
 echo "---> Starting the app"
-sudo docker exec -d $NAME pm2 start --no-daemon bin/www
+sudo docker exec -d $NAME pm2 start --no-daemon --watch bin/www
 
